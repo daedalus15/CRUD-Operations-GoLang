@@ -1,7 +1,7 @@
 <h1 align="center">CRUD Operations Using GoLang</h1>
 
 
-This project, made as a submission for the **Go Programming Language Course**, implements a RESTful API in GoLang for performing CRUD (Create, Read, Update, Delete) operations on a database. It provides endpoints to interact with the database via HTTP requests.
+This project, made as a submission for the **Go Programming Language** Course, implements a RESTful API in GoLang for performing CRUD (Create, Read, Update, Delete) operations on a database. It provides endpoints to interact with the database via HTTP requests.
 
 ## Features
 * Create: Add new entries to the database.
