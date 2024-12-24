@@ -42,7 +42,7 @@ func main() {
 			fmt.Println("Exiting...")
 			os.Exit(0)
 		default:
-			fmt.Println("Invalid choice")
+			fmt.Println("Invalid choice!")
 		}
 	}
 }
@@ -60,12 +60,12 @@ func createMovie() {
 	director, _ := reader.ReadString('\n')
 	movie.Director = strings.TrimSpace(director)
 
-	fmt.Print("Year: ")
+	fmt.Print("Year : ")
 	fmt.Scanln(&movie.Year)
 
 	jsonData, err := json.Marshal(movie)
 	if err != nil {
-		fmt.Println("Error marshalling JSON :", err)
+		fmt.Println("Error marshalling JSON : ", err)
 		return
 	}
 
@@ -84,7 +84,7 @@ func createMovie() {
 func getAllMovies() {
 	resp, err := http.Get("http://localhost:8080/movies")
 	if err != nil {
-		fmt.Println("Error fetching movies:", err)
+		fmt.Println("Error fetching movies : ", err)
 		return
 	}
 	defer resp.Body.Close()
@@ -92,11 +92,11 @@ func getAllMovies() {
 	var movies []Movie
 	err = json.NewDecoder(resp.Body).Decode(&movies)
 	if err != nil {
-		fmt.Println("Error decoding response:", err)
+		fmt.Println("Error decoding response : ", err)
 		return
 	}
 
-	fmt.Println("All movies:")
+	fmt.Println("All movies : ")
 	for _, movie := range movies {
 		fmt.Printf("ID: %s, Title: %s, Director: %s, Year: %d\n", movie.ID, movie.Title, movie.Director, movie.Year)
 	}
@@ -104,34 +104,34 @@ func getAllMovies() {
 
 func updateMovie() {
 	var movie Movie
-	fmt.Println("Enter ID of the movie to update: ")
+	fmt.Println("Enter ID of the movie to update : ")
 	fmt.Scanln(&movie.ID)
 
 	var updatedMovie Movie
-	fmt.Println("Enter new details of the movie:")
+	fmt.Println("Enter new details of the movie :")
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Title: ")
+	fmt.Print("Title : ")
 	title, _ := reader.ReadString('\n')
 	updatedMovie.Title = strings.TrimSpace(title)
 
-	fmt.Print("Director: ")
+	fmt.Print("Director : ")
 	director, _ := reader.ReadString('\n')
 	updatedMovie.Director = strings.TrimSpace(director)
 
-	fmt.Print("Year: ")
+	fmt.Print("Year : ")
 	fmt.Scanln(&updatedMovie.Year)
 
 	jsonData, err := json.Marshal(updatedMovie)
 	if err != nil {
-		fmt.Println("Error marshalling JSON:", err)
+		fmt.Println("Error marshalling JSON : ", err)
 		return
 	}
 
 	url := fmt.Sprintf("http://localhost:8080/movies/%s", movie.ID)
 	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(jsonData))
 	if err != nil {
-		fmt.Println("Error creating request:", err)
+		fmt.Println("Error creating request : ", err)
 		return
 	}
 
@@ -140,32 +140,32 @@ func updateMovie() {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Println("Error updating movie:", err)
+		fmt.Println("Error updating movie : ", err)
 		return
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("Movie updated successfully")
+	fmt.Println("Movie updated successfully!")
 }
 
 
 func deleteMovie() {
 	var movie Movie
-	fmt.Println("Enter ID of the movie to delete: ")
+	fmt.Println("Enter ID of the movie to delete : ")
 	fmt.Scanln(&movie.ID)
 
 	req, err := http.NewRequest(http.MethodDelete, fmt.Sprintf("http://localhost:8080/movies/%s", movie.ID), nil)
 	if err != nil {
-		fmt.Println("Error creating request:", err)
+		fmt.Println("Error creating request : ", err)
 		return
 	}
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		fmt.Println("Error deleting movie:", err)
+		fmt.Println("Error deleting movie : ", err)
 		return
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("Movie deleted successfully")
+	fmt.Println("Movie deleted successfully!")
 }
