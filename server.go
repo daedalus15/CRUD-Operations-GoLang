@@ -23,7 +23,6 @@ type Movie struct {
 	Year     int                `json:"year,omitempty" bson:"year,omitempty"`
 }
 
-
 func main() {
 	var err error
 	//MongoDB Atlas cluster string
@@ -43,6 +42,7 @@ func main() {
 
 	router := mux.NewRouter()
 
+	//Gorilla Mux handling CRUD operations
 	router.HandleFunc("/movies", getAllMovies).Methods("GET")
 	router.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	router.HandleFunc("/movies", createMovie).Methods("POST")
