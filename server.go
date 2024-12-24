@@ -26,7 +26,8 @@ type Movie struct {
 
 func main() {
 	var err error
-	client, err = mongo.NewClient(options.Client().ApplyURI("mongodb+srv://SuchirMV:WGBOp8GJ0uFf2NdU@cluster0.rb7ivtw.mongodb.net/"))
+	//MongoDB Atlas cluster string
+	client, err = mongo.NewClient(options.Client().ApplyURI("mongodb+srv://SuchirMV:WGBOp8GJ0uFf2NdU@cluster0.rb7ivtw.mongodb.net/")) 
 	if err != nil {
 		log.Fatal(err)
 	}
