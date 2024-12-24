@@ -20,13 +20,13 @@ type Movie struct {
 func main() {
 	var choice int
 	for {
-		fmt.Println("Menu:")
+		fmt.Println("Menu : ")
 		fmt.Println("1. Create a new movie")
 		fmt.Println("2. View all movies")
 		fmt.Println("3. Update a movie")
 		fmt.Println("4. Delete a movie")
 		fmt.Println("5. Exit")
-		fmt.Print("Enter your choice: ")
+		fmt.Print("Enter your choice : ")
 		fmt.Scanln(&choice)
 
 		switch choice {
@@ -49,14 +49,14 @@ func main() {
 
 func createMovie() {
 	var movie Movie
-	fmt.Println("Enter details of the new movie:")
+	fmt.Println("Enter details of the new movie : ")
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Title: ")
+	fmt.Print("Title : ")
 	title, _ := reader.ReadString('\n')
 	movie.Title = strings.TrimSpace(title)
 
-	fmt.Print("Director: ")
+	fmt.Print("Director : ")
 	director, _ := reader.ReadString('\n')
 	movie.Director = strings.TrimSpace(director)
 
@@ -65,18 +65,18 @@ func createMovie() {
 
 	jsonData, err := json.Marshal(movie)
 	if err != nil {
-		fmt.Println("Error marshalling JSON:", err)
+		fmt.Println("Error marshalling JSON :", err)
 		return
 	}
 
 	resp, err := http.Post("http://localhost:8080/movies", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
-		fmt.Println("Error creating movie:", err)
+		fmt.Println("Error creating movie : ", err)
 		return
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("Movie created successfully")
+	fmt.Println("Movie created successfully!")
 }
 
 
